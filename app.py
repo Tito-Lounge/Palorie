@@ -1,12 +1,10 @@
 import os
-import config
 import openai
 import pandas as pd
 import datetime
 import os
 
-openai.api_key = config.api_key
-
+openai.api_key = os.environ['OPENAI_API_KEY']
 
 # Input: User Input for Foods Eaten
 foodString = input("List out the foods you ate: ")
