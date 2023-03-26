@@ -5,5 +5,6 @@ If you have an OpenAI API key and want to test functionality, follow these instr
 1. Navigate to the [OpenAI Developer Portal](https://platform.openai.com/).
 2. Click on your profile icon on the top right.
 3. Click 'View API keys'
-4. Run the program.
-5. Paste it in.
+4. Create a file called config.py
+5. Type "api_key = '[your key here]'"
+6. Save and run.
