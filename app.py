@@ -1,9 +1,12 @@
 import os
 import openai
+import config
 import pandas as pd
 import datetime
 import os
+from dotenv import load_dotenv
 
+load_dotenv('.env')
 openai.api_key = os.environ['OPENAI_API_KEY']
 
 # Input: User Input for Foods Eaten
