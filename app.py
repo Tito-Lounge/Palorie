@@ -1,13 +1,12 @@
 import os
 import openai
-import config
 import pandas as pd
 import datetime
-import os
-from dotenv import load_dotenv
 
-load_dotenv('.env')
-openai.api_key = os.environ['OPENAI_API_KEY']
+# Requires an OpenAI key to test -- check the README to learn how to find it.
+print("This app (for the time being) requires your own OpenAI API key to run. If you simply wish to review, look at the output folder.")
+userAPIKey = input("If you have your API key and want to test functionality, you can paste it here. You can see the program, we don't save it: ")
+openai.api_key = userAPIKey
 
 # Input: User Input for Foods Eaten
 foodString = input("List out the foods you ate: ")
@@ -29,13 +28,16 @@ generated_text = response.choices[0].text
 timestamp = datetime.datetime.now(datetime.timezone.utc).astimezone()
 timestampString = "{}-{}-{}-{}{}{}.csv".format(timestamp.year, timestamp.month, timestamp.day, timestamp.strftime("%I"), timestamp.strftime("%M"), timestamp.strftime("%S"))
 
+# Create a raw text file for the output
 rawText = open('rawtext.txt', 'w')
 rawText.write(generated_text)
 rawText.close()
 
+# Convert text file to CSV using pandas and create it.
 dataframe = pd.read_csv('rawtext.txt', delimiter=',', header=None)
 dataframe.columns = ['Food', 'Amount', 'Calories', 'Protein', 'Carbohydrates', 'Fat']
 dataframe.to_csv("./output/" + timestampString, index=None)
 print(dataframe)
 
+# Clean up and delete the raw text file. 
 os.remove('rawtext.txt')
