@@ -1,0 +1,56 @@
+/* Primary colors */
+:root {
+    --seafoam-green: #78c2ad;
+    --gray: #707070;
+    --white: #ffffff;
+  }
+  
+  /* Form container */
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* Label */
+  label {
+    font-size: 1.2rem;
+    color: var(--gray);
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Input field */
+  input[type="text"] {
+    width: 100%;
+    padding: 0.8rem;
+    border: 2px solid var(--seafoam-green);
+    border-radius: 0.5rem;
+    font-size: 1.2rem;
+    color: var(--gray);
+    margin-bottom: 1rem;
+    transition: border-color 0.3s ease-in-out;
+  }
+  
+  /* Input field focus state */
+  input[type="text"]:focus {
+    outline: none;
+    border-color: var(--seafoam-green);
+    box-shadow: 0 0 0 3px rgba(120, 194, 173, 0.3);
+  }
+  
+  /* Submit button */
+  button[type="submit"] {
+    background-color: var(--seafoam-green);
+    color: var(--white);
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.8rem 1.2rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  /* Submit button hover state */
+  button[type="submit"]:hover {
+    background-color: rgba(120, 194, 173, 0.8);
+  }
