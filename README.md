@@ -9,4 +9,4 @@ If you have an OpenAI API key and want to test functionality, follow these instr
 5. Type "api_key = '[your key here]'"
 6. Save and run.
 
-This application runs locally, and we've noticed that outputs may differ depending on operating system.
+Requires pandas, OpenAI, Django and a Python Virtual Environment to host.
