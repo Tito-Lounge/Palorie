@@ -1,4 +1,3 @@
-<!-- Write the HTML and CSS for a page that takes text input to submit to a server with a submit button. Make it look sleek and modern with seafoam green, gray and white as the primary colors. -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +7,7 @@
 <body>
     <h1> PalorieApp</h1>
     <h2> A GPT-3 Powered Calorie Estimation Tool </h2>
+    <p> Prompt successfully generated! </p>
 <form method="post" action="{% url 'process_form' %}">
     {% csrf_token %}
     <label for="input">What did you eat today?:</label>
