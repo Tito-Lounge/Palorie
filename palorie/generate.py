@@ -4,21 +4,21 @@ import pandas as pd
 import datetime
 import config
 
-
-# Put API key in a config.py file.
 def generateCSV(foodString):
+
+  # Put API key in a config.py file.
   openai.api_key = config.api_key
   if openai.api_key is None:
     return 'ERR No API key found'
   else:
     categoryInstruction = 'Please create a table listing the nutritional information for the following foods: Food, Amount, Calories, Protein, Carbohydrates, Saturated Fat, Trans Fat, Polyunsaturated Fat, Monounsaturated Fat.'
     formatInstruction = ' Separate each column with commas. Create a new row, separated by a new line, for each food listed. Truncate the amount from the food column so that only the name of the food is written in that column. Do not include column names in the output.'
-    exceptionInstruction = ' If a listed item is not food, do not include it in your output: '
+    exceptionInstruction = ' If a listed item is not food, output nothing at all: '
     prompt = categoryInstruction + formatInstruction + exceptionInstruction + foodString
     response = openai.Completion.create(
       model="text-davinci-003",
       prompt=prompt,
-      temperature=0.7,
+      temperature=0.3,
       max_tokens=256,
       top_p=1,
       frequency_penalty=0,
