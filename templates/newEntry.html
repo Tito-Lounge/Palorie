@@ -7,7 +7,26 @@
 </head> 
 <body>
     <h1> PalorieApp</h1>
-    <h2> A GPT-3 Powered Calorie Estimation Tool </h2>
-    <p> This page is showing because a new entry was generated! </p>
+    <h2> A GPT-3 Powered Macronutrient Estimation Tool </h2>
+    <p> Entry generated! </p>
+    <!-- How do I display the contents of a CSV file on a HTML document through Django? -->
+    <table>
+        <thead>
+        <tr>
+            {% for column in data.columns %}
+            <th>{{ column }}</th>
+            {% endfor %}
+        </tr>
+        </thead>
+        <tbody>
+        {% for index, row in data.iterrows %}
+        <tr>
+            {% for value in row %}
+            <td>{{ value }}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 </body>
 </html>

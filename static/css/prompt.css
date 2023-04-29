@@ -1,12 +1,38 @@
 /* Modify the CSS for to make the textbox centered with the page, with a dark gray background, a place for me to put a title and subtitle above the textbox, and the font sans-serif. */
 /* Primary colors */
 :root {
-    --seafoam-green: #78c2ad;
-    --gray: #707070;
-    --white: #ffffff;
-    --dark-gray: #333333;
-  }
-  
+  --seafoam-green: #78c2ad;
+  --gray: #707070;
+  --white: #ffffff;
+  --dark-gray: #333333;
+}
+
+/* Table styles */
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 8px;
+}
+
+th {
+  background-color: var(--seafoam-green);
+  color: var(--white);
+}
+
+tr:nth-child(even) {
+  background-color: var(--gray);
+}
+
+tr:hover {
+  background-color: var(--seafoam-green);
+  color: var(--white);
+}
+
   /* Page container */
   body {
     display: flex;
@@ -84,4 +110,4 @@
   button[type="submit"]:hover {
     background-color: rgba(120, 194, 173, 0.8);
   }
-  
+
