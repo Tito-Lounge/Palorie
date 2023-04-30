@@ -10,7 +10,7 @@
     <h2> A GPT-3 Powered Macronutrient Estimation Tool </h2>
 <form method="post" action="{% url 'process_form' %}">
     {% csrf_token %}
-    <label for="input">What did you eat today?:</label>
+    <label for="input">List out what you ate in a comma separated list!</label>
     <input type="text" id="input" name="input">
     <button type="submit">Calculate</button>
 </form>  
