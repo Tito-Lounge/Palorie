@@ -1,113 +1,122 @@
-/* Modify the CSS for to make the textbox centered with the page, with a dark gray background, a place for me to put a title and subtitle above the textbox, and the font sans-serif. */
+/* Modify the CSS for to make the textbox centered with the page, with a dark gray background, a place for me to put a title and subtitle above the textbox, and the font sans-serif. 
+PROMPT 1:
+Write the HTML and CSS for a page that takes text input to submit to a server with a submit button. Make it look sleek and modern with seafoam green, gray and white as the primary colors.
+
+PROMPT 2:
+Modify the CSS such that the primary background color should be #f5eada, with accent colors #a18864, #f79302, and #64cc8a. Also include some styling for a table and table elements.
+(I changed my mind about the colors)
+
+PROMPT 3:
+Modify it such that the interface looks more modern. Make the primary font a round sans-serif font.
+
+PROMPT 4: 
+Make it so the box doesn't span the full width of the page, and that the headers are centered.
+
+PROMPT 5: 
+
+
+*/
+
 /* Primary colors */
 :root {
-  --seafoam-green: #78c2ad;
-  --gray: #707070;
-  --white: #ffffff;
-  --dark-gray: #333333;
+  --primary-bg-color: #f5eada;
+  --accent-color-1: #a18864;
+  --accent-color-2: #f79302;
+  --accent-color-3: #64cc8a;
+  --text-color: #257046;
+}
+
+/* Body background */
+body {
+  background-color: var(--primary-bg-color);
+  font-family: 'Circular Std', sans-serif;
+}
+
+h1, h2, p {
+  text-align: center;
+  color: var(--text-color);
+}
+
+/* Form container */
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* Label */
+label {
+  font-size: 1.2rem;
+  color: var(--accent-color-1);
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+/* Input field */
+input[type="text"] {
+  width: 100%;
+  padding: 0.8rem;
+  border: 2px solid var(--accent-color-2);
+  border-radius: 0.5rem;
+  font-size: 1.2rem;
+  color: var(--accent-color-1);
+  margin-bottom: 1rem;
+  transition: border-color 0.3s ease-in-out;
+  font-family: 'Circular Std', sans-serif;
+}
+
+/* Input field focus state */
+input[type="text"]:focus {
+  outline: none;
+  border-color: var(--accent-color-2);
+  box-shadow: 0 0 0 3px rgba(247, 147, 2, 0.3);
+}
+
+/* Submit button */
+button[type="submit"] {
+  background-color: var(--accent-color-3);
+  color: var(--primary-bg-color);
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.8rem 1.2rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  font-family: 'Circular Std', sans-serif;
+}
+
+/* Submit button hover state */
+button[type="submit"]:hover {
+  background-color: rgba(100, 204, 138, 0.8);
 }
 
 /* Table styles */
 table {
   border-collapse: collapse;
   width: 100%;
+  margin-bottom: 1rem;
 }
 
-th,
-td {
-  text-align: left;
-  padding: 8px;
+th, td {
+  border: 1px solid var(--accent-color-1);
+  padding: 0.5rem;
+  font-family: 'Circular Std', sans-serif;
 }
 
 th {
-  background-color: var(--seafoam-green);
-  color: var(--white);
+  background-color: var(--accent-color-1);
+  color: var(--primary-bg-color);
+  text-align: center;
 }
 
 tr:nth-child(even) {
-  background-color: var(--gray);
+  background-color: var(--accent-color-3);
 }
 
 tr:hover {
-  background-color: var(--seafoam-green);
-  color: var(--white);
+  background-color: rgba(100, 204, 138, 0.5);
 }
 
-  /* Page container */
-  body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: var(--dark-gray);
-    font-family: sans-serif;
-  }
-  
-  /* Title and subtitle */
-  h1, h2 {
-    color: var(--white);
-    text-align: center;
-    margin-top: 2rem;
-  }
-
-  p {
-    color: var(--white);
-  }
-  
-  /* Text input container */
-  .form-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 80%;
-    height: 50vh;
-    background-color: var(--gray);
-    border-radius: 1rem;
-    margin-top: 2rem;
-    padding: 2rem;
-  }
-  
-  /* Label */
-  label {
-    font-size: 1.2rem;
-    color: var(--white);
-    margin-bottom: 0.5rem;
-  }
-  
-  /* Input field */
-  input[type="text"] {
-    width: 100%;
-    padding: 0.8rem;
-    border: 2px solid var(--seafoam-green);
-    border-radius: 0.5rem;
-    font-size: 1.2rem;
-    color: var(--white);
-    background-color: var(--dark-gray);
-    margin-bottom: 1rem;
-    transition: border-color 0.3s ease-in-out;
-  }
-  
-  /* Input field focus state */
-  input[type="text"]:focus {
-    outline: none;
-    border-color: var(--seafoam-green);
-    box-shadow: 0 0 0 3px rgba(120, 194, 173, 0.3);
-  }
-  
-  /* Submit button */
-  button[type="submit"] {
-    background-color: var(--seafoam-green);
-    color: var(--white);
-    border: none;
-    border-radius: 0.5rem;
-    padding: 0.8rem 1.2rem;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
-  }
-  
-  /* Submit button hover state */
-  button[type="submit"]:hover {
-    background-color: rgba(120, 194, 173, 0.8);
-  }
 
