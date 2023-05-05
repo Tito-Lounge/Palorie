@@ -6,4 +6,5 @@ urlpatterns = [
     path('newEntry/', views.newEntry, name="newEntry"),
     path('error/', views.error, name='error'),
     path('process_form/', views.process_form, name='process_form'),
+    path('downloadFile/', views.downloadFile, name='downloadFile'),
 ]

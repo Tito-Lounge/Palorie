@@ -28,5 +28,9 @@
         {% endfor %}
         </tbody>
     </table>
+    <form method="post" action="{% url 'newEntry' %}">
+        {% csrf_token %}
+        <button type="submit">Download CSV</button>
+    </form>  
 </body>
 </html>
