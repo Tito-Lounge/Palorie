@@ -144,3 +144,22 @@ tr:hover {
   background-color: rgba(100, 204, 138, 0.8);
   transition: background-color 0.3s ease-in-out;
 }
+
+/* Download Button */
+.btn-download {
+  background-color: var(--accent-color-3);
+  color: var(--primary-bg-color);
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.8rem 1.2rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  font-family: 'Circular Std', sans-serif;
+}
+
+/* Primary button hover state */
+.btn-download:hover {
+  background-color: rgba(100, 204, 138, 0.8);
+  transition: background-color 0.3s ease-in-out;
+}

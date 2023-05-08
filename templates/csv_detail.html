@@ -6,8 +6,7 @@
     <link rel="stylesheet" href="{% static './css/prompt.css' %}">
 </head> 
 <body>
-    <a href="/" class="btn btn-primary">Back</a>
-    <a href="/csv_list" class="btn btn-primary">Past Entries</a>
+    <a href="/csv_list" class="btn btn-primary">Back</a>
     <h1> PalorieApp</h1>
     <h2> A GPT-3 Powered Macronutrient Estimation Tool </h2>
     <!-- How do I display the contents of a CSV file on a HTML document through Django? -->
@@ -29,9 +28,8 @@
         {% endfor %}
         </tbody>
     </table>
-    <form method="post" action="{% url 'newEntry' %}">
-        {% csrf_token %}
+    <form action="{% url 'download_csv' filename=filename %}">
         <button type="submit">Download CSV</button>
-    </form> 
+    </form>
 </body>
 </html>

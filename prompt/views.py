@@ -37,16 +37,21 @@ def newEntry(request):
     return HttpResponse(template.render(context))
 
 @csrf_exempt # Couldn't figure out how to get CSRF protection working. Temporary workaround for testing -- don't do this in production.
-def downloadFile(request):
+def downloadFile(request): # FOR THE FILE IN NEWENTRY
   csv_files = [f for f in os.listdir('./output') if f.endswith('.csv')]
   csv_files.sort(key=lambda x: os.path.getmtime(os.path.join('./output', x)), reverse=True)
   file_path = os.path.join('./output', csv_files[0])
   with open(file_path, 'r') as file:
     response = HttpResponse(file, content_type='text/csv')
-    # Timestamp for the file.
-    timestamp = datetime.datetime.now(datetime.timezone.utc).astimezone()
-    timestampString = "palorie-{}-{}-{}-{}{}{}".format(timestamp.year, timestamp.month, timestamp.day, timestamp.strftime("%I"), timestamp.strftime("%M"), timestamp.strftime("%S"))
-    response['Content-Disposition']= 'attachment; filename="{}.csv"'.format(timestampString)
+    response['Content-Disposition'] = f'attachment; filename={os.path.basename(file_path)}'
+  return response
+
+@csrf_exempt 
+def download_csv(request, filename): # FOR THE FILES IN THE LIST OF CSVs
+  file_path = os.path.join('./output', filename)
+  with open(file_path, 'rb') as csv_file:
+    response = HttpResponse(csv_file.read(), content_type='text/csv')
+    response['Content-Disposition'] = f'attachment; filename={filename}'
   return response
 
 @csrf_exempt # Couldn't figure out how to get CSRF protection working. Temporary workaround for testing -- don't do this in production.
@@ -75,5 +80,6 @@ def csv_list(request):
 def csv_detail(request, filename):
   file_path = './output/' + filename
   data = pd.read_csv(file_path)
-  context = {'data': data}
+  context = {'data': data,
+             'filename' : filename}
   return render(request, 'csv_detail.html', context)

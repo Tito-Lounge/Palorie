@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="{% static './css/prompt.css' %}">
 </head> 
 <body>
+    <a href="/newEntry" class="btn btn-primary">Most Recent</a>
+    <a href="/csv_list" class="btn btn-primary">Past Entries</a>
     <h1> PalorieApp</h1>
     <h2> A GPT-3 Powered Macronutrient Estimation Tool </h2>
 <form method="post" action="{% url 'process_form' %}">
