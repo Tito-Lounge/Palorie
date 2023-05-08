@@ -62,3 +62,18 @@ def process_form(request):
       template = loader.get_template('error.html')
       return HttpResponse(template.render())
   
+@csrf_exempt # Couldn't figure out how to get CSRF protection working. Temporary workaround for testing -- don't do this in production.
+def csv_list(request):
+  file_path = './output'
+  csv_files = [f for f in os.listdir(file_path) if f.endswith('.csv')]
+  context = {'csv_files' : csv_files,
+             'file_path' : file_path, 
+             }
+  return render(request, 'csv_list.html', context)
+
+@csrf_exempt # Couldn't figure out how to get CSRF protection working. Temporary workaround for testing -- don't do this in production.
+def csv_detail(request, filename):
+  file_path = './output/' + filename
+  data = pd.read_csv(file_path)
+  context = {'data': data}
+  return render(request, 'csv_detail.html', context)
