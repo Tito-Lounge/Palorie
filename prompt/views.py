@@ -71,6 +71,7 @@ def process_form(request):
 def csv_list(request):
   file_path = './output'
   csv_files = [f for f in os.listdir(file_path) if f.endswith('.csv')]
+  csv_files.sort(key=lambda x: os.path.getmtime(os.path.join('./output', x)), reverse=True)
   context = {'csv_files' : csv_files,
              'file_path' : file_path, 
              }

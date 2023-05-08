@@ -3,22 +3,15 @@
 <head>
     {% load static %}
     <link rel="stylesheet" href="{% static './css/prompt.css' %}">
-    <style>
-        a {
-            color: --text-color;
-            
-        }
-    </style>
 </head> 
 <body>
     <a href="/" class="btn btn-primary">Back</a>
     <h1> PalorieApp</h1>
     <h2> A GPT-3 Powered Macronutrient Estimation Tool </h2>
-    <h3>CSV Files:</h3>
     <table>
         <thead>
             <tr>
-                <th>Filename</th>
+                <th>Past Entries (in Ascending Order)</th>
             </tr>
         </thead>
         <tbody>
