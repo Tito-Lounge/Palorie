@@ -1,8 +1,6 @@
 # PalorieApp
 An application by Eric Santos, Jared Ho, Thien Bryan Nguyen and Derrick Chan designed to take a user's description of what they've eaten and utilize GPT-4o to calculate and tabulate the nutritional information.
 
-[NOTE] This project is deprecated due to OpenAI's shift in how models are structured.
-
 ### Test it Yourself!
 If you have an OpenAI API key and want to test functionality, follow these instructions.
 1. Navigate to the [OpenAI Developer Portal](https://platform.openai.com/).
