@@ -1,5 +1,5 @@
 # PalorieApp
-An application by Eric Santos, Jared Ho and Ritesh Kothari designed to take a user's description of what they've eaten and utilize GPT-3 to calculate and tabulate the nutritional information.
+An application by Eric Santos, Jared Ho, Thien Bryan Nguyen and Derrick Chan designed to take a user's description of what they've eaten and utilize GPT-4o to calculate and tabulate the nutritional information.
 
 [NOTE] This project is deprecated due to OpenAI's shift in how models are structured.
 
