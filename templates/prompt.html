@@ -1,20 +1,95 @@
-<!-- Write the HTML and CSS for a page that takes text input to submit to a server with a submit button. Make it look sleek and modern with seafoam green, gray and white as the primary colors. -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PalorieApp - Macronutrient Estimation</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static './css/prompt.css' %}">
-</head> 
+    <link rel="stylesheet" href="{% static 'css/prompt.css' %}">
+</head>
 <body>
-    <a href="/newEntry" class="btn btn-primary">Most Recent</a>
-    <a href="/csv_list" class="btn btn-primary">Past Entries</a>
-    <h1> PalorieApp</h1>
-    <h2> A GPT-3 Powered Macronutrient Estimation Tool </h2>
-<form method="post" action="{% url 'process_form' %}">
-    {% csrf_token %}
-    <label for="input">List out what you ate in a comma separated list!</label>
-    <input type="text" id="input" name="input">
-    <button type="submit">Calculate</button>
-</form>  
+    <main class="container">
+        <h1>Palorie</h1>
+        <form method="post" action="{% url 'process_form' %}" class="input-form">
+            {% csrf_token %}
+            <label for="input">Describe what you ate and we'll take it from here.</label>
+            
+            <!-- Input field for typing or voice -->
+            <input type="text" id="input" name="input" placeholder="For example: 'Today I ate chicken, beans & rice'" required>
+            
+            <!-- Voice input button -->
+            
+            
+            <div class="button-group">
+                <a href="{% url 'entry_detail' filename %}" class="btn">Most Recent</a>
+                <a href="/entry_list" class="btn">Past Entries</a>
+                <button type="submit" class="submit-btn">Calculate</button>
+                <button type="button" id="voice-btn">🎤</button>
+            </div>
+        </form>
+    </main>
+
+    <script>
+        // Voice-to-text feature using the Web Speech API
+        const voiceBtn = document.getElementById('voice-btn');
+        const inputField = document.getElementById('input');
+        
+        if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            const recognition = new SpeechRecognition();
+            recognition.continuous = true; // Keep listening continuously
+            recognition.interimResults = true; // Enable interim results for real-time display
+            recognition.lang = 'en-US';
+    
+            let recognizing = false; // Track whether recognition is currently active
+    
+            // Toggle speech recognition on button click
+            voiceBtn.addEventListener('click', () => {
+                if (recognizing) {
+                    recognition.stop();  // Stop speech recognition
+                } else {
+                    recognition.start(); // Start speech recognition
+                }
+            });
+    
+            // Handle when recognition starts
+            recognition.onstart = () => {
+                recognizing = true;
+                voiceBtn.textContent = '🛑'; // Change button text
+            };
+    
+            // Handle when recognition stops
+            recognition.onend = () => {
+                recognizing = false;
+                voiceBtn.textContent = '🎤'; // Change button text back
+            };
+    
+            // Process speech recognition results
+            recognition.onresult = (event) => {
+                let interimTranscript = '';
+                let finalTranscript = inputField.value;  // Initialize with existing value
+    
+                for (let i = 0; i < event.results.length; i++) {
+                    const transcript = event.results[i][0].transcript;
+                    if (event.results[i].isFinal) {
+                        finalTranscript += transcript;  // Add final results to the input field
+                    } else {
+                        interimTranscript += transcript; // Update interim text
+                    }
+                }
+    
+                inputField.value = finalTranscript + interimTranscript; // Display the combined result
+            };
+    
+            // Handle speech recognition errors
+            recognition.onerror = (event) => {
+                console.error('Speech recognition error:', event.error);
+            };
+        } else {
+            voiceBtn.style.display = 'none'; // Hide the button if SpeechRecognition is not supported
+            console.warn('Speech recognition not supported in this browser.');
+        }
+    </script>
+    
 </body>
 </html>

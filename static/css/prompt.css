@@ -1,165 +1,181 @@
-/* Modify the CSS for to make the textbox centered with the page, with a dark gray background, a place for me to put a title and subtitle above the textbox, and the font sans-serif. 
-PROMPT 1:
-Write the HTML and CSS for a page that takes text input to submit to a server with a submit button. Make it look sleek and modern with seafoam green, gray and white as the primary colors.
-
-PROMPT 2:
-Modify the CSS such that the primary background color should be #f5eada, with accent colors #a18864, #f79302, and #64cc8a. Also include some styling for a table and table elements.
-(I changed my mind about the colors)
-
-PROMPT 3:
-Modify it such that the interface looks more modern. Make the primary font a round sans-serif font.
-
-PROMPT 4: 
-Make it so the box doesn't span the full width of the page, and that the headers are centered.
-
-PROMPT 5: 
-
-
-*/
-
 /* Primary colors */
 :root {
-  --primary-bg-color: #f5eada;
-  --accent-color-1: #a18864;
-  --accent-color-2: #f79302;
-  --accent-color-3: #64cc8a;
-  --text-color: #257046;
+  --primary-bg-color: #f4f5f7;
+  --accent-color-1: #1abc9c; /* Seafoam green */
+  --accent-color-2: #16a085;
+  --text-color-dark: #333;
+  --text-color-light: #7f8c8d; /* Gray */
+  --white-color: #ffffff;
+  --border-color: #ddd;
 }
 
-/* Body background */
+/* Body background and general layout */
 body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: var(--primary-bg-color);
-  font-family: 'Circular Std', sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  color: var(--text-color-dark);
 }
 
-h1, h2, p {
+/* Headers */
+h1, h2 {
+  margin: 0.5rem 0;
   text-align: center;
-  clear: both;
-  color: var(--text-color);
+}
+
+h1 {
+  color: var(--accent-color-1);
+  font-size: 2.5rem;
+}
+
+h2 {
+  color: var(--text-color-light);
+  font-size: 1.2rem;
+}
+
+/* Navigation */
+.nav {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+/* Button styling */
+.btn, button[type="submit"] {
+  background-color: var(--accent-color-1);
+  color: var(--white-color);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.btn, button[type="button"] {
+  background-color: var(--accent-color-1);
+  color: var(--white-color);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.btn:hover, button[type="submit"]:hover {
+  background-color: var(--accent-color-2);
+}
+
+.btn:hover, button[type="button"]:hover {
+  background-color: var(--accent-color-2);
+}
+
+/* Table container and styling */
+.table-container {
+  margin: 20px 0;
+  width: 80%;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+th, td {
+  padding: 12px 15px; /* Padding for better readability */
+  border: 1px solid var(--border-color);
+  text-align: left;
 }
 
 /* Form container */
 form {
   display: flex;
   flex-direction: column;
+  gap: 15px;
   align-items: center;
+  width: 100%;
   max-width: 500px;
   margin: 0 auto;
 }
 
-/* Label */
-label {
-  font-size: 1.2rem;
-  color: var(--accent-color-1);
-  margin-bottom: 0.5rem;
-  text-align: center;
+form label {
+  text-align: left;
+  color: var(--text-color-dark);
+  font-size: 1rem;
 }
 
-/* Input field */
-input[type="text"] {
+form input[type="text"] {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  transition: border-color 0.3s ease;
   width: 100%;
-  padding: 0.8rem;
-  border: 2px solid var(--accent-color-2);
-  border-radius: 0.5rem;
-  font-size: 1.2rem;
-  color: var(--accent-color-1);
-  margin-bottom: 1rem;
-  transition: border-color 0.3s ease-in-out;
-  font-family: 'Circular Std', sans-serif;
 }
 
-/* Input field focus state */
-input[type="text"]:focus {
+form input[type="text"]:focus {
+  border-color: var(--accent-color-1);
   outline: none;
-  border-color: var(--accent-color-2);
-  box-shadow: 0 0 0 3px rgba(247, 147, 2, 0.3);
 }
 
-/* Submit button */
 button[type="submit"] {
-  background-color: var(--accent-color-3);
-  color: var(--primary-bg-color);
-  border: none;
-  border-radius: 0.5rem;
-  padding: 0.8rem 1.2rem;
-  font-size: 1.2rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
-  font-family: 'Circular Std', sans-serif;
-}
-
-/* Submit button hover state */
-button[type="submit"]:hover {
-  background-color: rgba(100, 204, 138, 0.8);
-}
-
-/* Table styles */
-table {
-  border-collapse: collapse;
-  width: 100%;
-  margin-bottom: 1rem;
-}
-
-th, td {
-  border: 1px solid var(--accent-color-1);
-  padding: 0.5rem;
-  font-family: 'Circular Std', sans-serif;
-}
-
-th {
+  padding: 10px;
+  font-size: 1rem;
   background-color: var(--accent-color-1);
-  color: var(--primary-bg-color);
-  text-align: center;
-}
-
-tr:nth-child(even) {
-  background-color: var(--accent-color-3);
-}
-
-tr:hover {
-  background-color: rgba(100, 204, 138, 0.5);
-}
-
-/* PROMPT: Can you make some CSS for this [back] button class based on my existing button style? [PASTED CSS FOR FORM BUTTON AND HOVER] */
-/* Primary button */
-.btn-primary {
-  background-color: var(--accent-color-3);
-  color: var(--primary-bg-color);
+  color: var(--white-color);
   border: none;
-  border-radius: 0.5rem;
-  padding: 0.8rem 1.2rem;
-  font-size: 1.2rem;
+  border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
-  font-family: 'Circular Std', sans-serif;
-  
-  /* Top Left Positioning */
-  position: relative;
-  float: left;
-  margin: 10px;
+  transition: background-color 0.3s ease;
 }
 
-/* Primary button hover state */
-.btn-primary:hover {
-  background-color: rgba(100, 204, 138, 0.8);
-  transition: background-color 0.3s ease-in-out;
+button[type="submit"]:hover {
+  background-color: var(--accent-color-2);
 }
 
-/* Download Button */
-.btn-download {
-  background-color: var(--accent-color-3);
-  color: var(--primary-bg-color);
-  border: none;
-  border-radius: 0.5rem;
-  padding: 0.8rem 1.2rem;
-  font-size: 1.2rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
-  font-family: 'Circular Std', sans-serif;
+/* Progress bar container */
+.progress-bar-container {
+  width: 80%; /* Width of the progress bar */
+  max-width: 500px; /* Maximum width */
+  margin: 20px auto; /* Center it on the page */
 }
 
-/* Primary button hover state */
-.btn-download:hover {
-  background-color: rgba(100, 204, 138, 0.8);
-  transition: background-color 0.3s ease-in-out;
+/* Progress bar styling */
+.progress-bar-container .plotly-graph-div {
+  border-radius: 5px; /* Rounded corners for a smooth look */
+  overflow: hidden; /* Ensure no overflow */
 }
+
+/* Mobile Responsiveness */
+@media (max-width: 600px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1rem;
+  }
+
+  .nav {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .table-container {
+    width: 50%;
+    margin: 20px auto;
+    overflow-x: auto;
+  }
+}
+

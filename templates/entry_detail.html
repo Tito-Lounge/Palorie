@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static './css/prompt.css' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nutritional Composition</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f5f7;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .progress-container {
+            margin: 10px; /* Center the container */
+            max-width: 600px; /* Optional max width */
+        }
+
+        meter {
+            width: 100%; /* Make the meter full-width */
+            height: 30px; /* Height of the meter */
+            margin: 0 10px; /* Add horizontal margin */
+        }
+    </style>
+</head>
+<body>
+    
+    <h1>Palorie</h1>
+    
+    <h2>Calorie Data</h2>
+    <div class="table-container">
+        {{ data|safe }}
+    </div>
+
+    <h2>Caloric Intake</h2>
+    <div class="progress-container">
+        <meter value="{{ progress }}" min="0" max="2000"></meter>
+        <p>{{progress}} Calories / 2000 Calories</p>
+    </div>
+
+    <form action="{% url 'download_file' filename=filename %}">
+        <div class="button-group">
+            <a href="/entry_list" class="btn btn-primary">Back</a>
+            <button type="submit">Download as JSON</button>
+        </div>
+    </form>
+
+    <h2>Nutritional Composition</h2>
+    {{ pieChart|safe }}
+
+</body>
+</html>

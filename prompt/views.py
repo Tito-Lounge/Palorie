@@ -5,36 +5,28 @@ from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 
 from palorie.generate import generateCSV
+from palorie.visualizeData import pieChart
 import pandas as pd
+import plotly.express as px
+import plotly.graph_objects as go
 import os
 import datetime
 
 # Default view. Just asks for a prompt.
 def home(request):
-  template = loader.get_template('prompt.html')
-  return HttpResponse(template.render())
+  # Generate File Path for Most Recent
+  file_path = './output'
+  file_list = [f for f in os.listdir(file_path) if f.endswith('.json')]
+  file_list.sort(key=lambda x: os.path.getmtime(os.path.join('./output', x)), reverse=True)
+  most_recent = file_list[0]
+
+  context = {'filename': most_recent }
+  return render(request, 'prompt.html', context)
 
 # Generic error view -- currently only used to show a lack of API key.
 def error(request):
   template = loader.get_template('error.html')
   return HttpResponse(template.render())
-
-# View for a newly generated entry.
-@csrf_exempt # Couldn't figure out how to get CSRF protection working. Temporary workaround for testing -- don't do this in production.
-def newEntry(request):
-  # PROMPT USED: "Instead of getting a specific filepath to a CSV file, can I make it so that it outputs the most recently created file from a folder?"
-  # Get a list of all CSV files in the directory, sort the list by creation time (most recent first)
-  csv_files = [f for f in os.listdir('./output') if f.endswith('.csv')]
-  csv_files.sort(key=lambda x: os.path.getmtime(os.path.join('./output', x)), reverse=True)
-  data = pd.read_csv(os.path.join('./output', csv_files[0]))
-  context = {'data' : data}
-  template = loader.get_template('newEntry.html')
-  
-  if request.method == 'POST':
-    return redirect(reverse('downloadFile'))
-  else:
-    template = loader.get_template('newEntry.html')
-    return HttpResponse(template.render(context))
 
 @csrf_exempt # Couldn't figure out how to get CSRF protection working. Temporary workaround for testing -- don't do this in production.
 def downloadFile(request): # FOR THE FILE IN NEWENTRY
@@ -47,7 +39,7 @@ def downloadFile(request): # FOR THE FILE IN NEWENTRY
   return response
 
 @csrf_exempt 
-def download_csv(request, filename): # FOR THE FILES IN THE LIST OF CSVs
+def download_file(request, filename): # FOR THE FILES IN THE LIST OF CSVs
   file_path = os.path.join('./output', filename)
   with open(file_path, 'rb') as csv_file:
     response = HttpResponse(csv_file.read(), content_type='text/csv')
@@ -68,19 +60,31 @@ def process_form(request):
       return HttpResponse(template.render())
   
 @csrf_exempt # Couldn't figure out how to get CSRF protection working. Temporary workaround for testing -- don't do this in production.
-def csv_list(request):
+def entry_list(request):
   file_path = './output'
-  csv_files = [f for f in os.listdir(file_path) if f.endswith('.csv')]
-  csv_files.sort(key=lambda x: os.path.getmtime(os.path.join('./output', x)), reverse=True)
-  context = {'csv_files' : csv_files,
+  file_list = [f for f in os.listdir(file_path) if f.endswith('.json')]
+  file_list.sort(key=lambda x: os.path.getmtime(os.path.join('./output', x)), reverse=True)
+  context = {'file_list' : file_list,
              'file_path' : file_path, 
              }
-  return render(request, 'csv_list.html', context)
+  return render(request, 'entry_list.html', context)
 
 @csrf_exempt # Couldn't figure out how to get CSRF protection working. Temporary workaround for testing -- don't do this in production.
-def csv_detail(request, filename):
+def entry_detail(request, filename):
   file_path = './output/' + filename
-  data = pd.read_csv(file_path)
-  context = {'data': data,
-             'filename' : filename}
-  return render(request, 'csv_detail.html', context)
+  # Generate dataframe from filepath
+  data = pd.read_json(file_path)
+
+  # Capitalize column names
+  data.columns = data.columns.str.capitalize()
+  total_calories = data['Calories'].sum()
+
+  # Visualize nutritional data
+  chart_html = pieChart(data)
+  table_html = data.to_html(index=False)
+  context = {'data': table_html,
+             'filename' : filename,
+             'pieChart' : chart_html,
+             'progress' : total_calories}
+  
+  return render(request, 'entry_detail.html', context)

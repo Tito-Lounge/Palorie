@@ -1,0 +1,22 @@
+[
+    {
+        "name": "Beef Panang Curry",
+        "amount": "0.5 cup",
+        "calories": 250,
+        "protein": 20,
+        "carbohydrates": 10,
+        "fats": 15,
+        "sugar": 3,
+        "sodium": 600
+    },
+    {
+        "name": "White Jasmine Rice",
+        "amount": "0.5 cup",
+        "calories": 150,
+        "protein": 3,
+        "carbohydrates": 34,
+        "fats": 0.5,
+        "sugar": 0,
+        "sodium": 0
+    }
+]
